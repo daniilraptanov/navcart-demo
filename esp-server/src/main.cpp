@@ -4,6 +4,8 @@
 #include <WebServer.h>
 #include <LittleFS.h>
 
+#include "./monitoring/monitoring.h"
+
 const char* ssid = "NAVCART_DEMO";
 const byte DNS_PORT = 53;
 
@@ -72,4 +74,5 @@ void setup() {
 void loop() {
     dnsServer.processNextRequest();
     server.handleClient();
+    Monitoring::tick();
 }
