@@ -1,7 +1,1 @@
 .env
-.pio
-
-node_modules
-build
-dist
-data
