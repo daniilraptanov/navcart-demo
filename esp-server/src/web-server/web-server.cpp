@@ -1,11 +1,12 @@
 #include "./web-server.h"
 
 namespace AppWebServer {
-    static const char* ssid = "NAVCART_DEMO";
-    static const byte DNS_PORT = 53;
-
-    static DNSServer dnsServer;
-    static WebServer server(80);
+    DNSServer& getDnsServer() {
+        return dnsServer;
+    }
+    WebServer& getWebServer() {
+        return server;
+    }
 
     void setup() {
         if (!LittleFS.begin(true)) {
@@ -24,9 +25,9 @@ namespace AppWebServer {
 
         dnsServer.start(DNS_PORT, "*", myIP);
 
-        server.on("/", handleRoot);
-        server.on("/generate_204", handleRoot); // Android captive portal
-        server.onNotFound(handleNotFound);
+        server.on("/", AppWebServer::handleRoot);
+        server.on("/generate_204", AppWebServer::handleRoot); // Android captive portal
+        server.onNotFound(AppWebServer::handleNotFound);
 
         server.begin();
         Serial.println("HTTP & DNS servers started");
@@ -55,7 +56,7 @@ namespace AppWebServer {
         String path = server.uri();
         if (LittleFS.exists(path)) {
             File file = LittleFS.open(path, "r");
-            server.streamFile(file, getContentType(path));
+            server.streamFile(file, AppWebServer::getContentType(path));
             file.close();
             return;
         }

@@ -9,7 +9,7 @@ void setup() {
 }
 
 void loop() {
-    AppWebServer::dnsServer.processNextRequest();
-    AppWebServer::server.handleClient();
+    AppWebServer::getDnsServer().processNextRequest();
+    AppWebServer::getWebServer().handleClient();
     Monitoring::tick();
 }
