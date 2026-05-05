@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
-export function useESPWebSocket() {
+export const useAppWebSocket = () => {
 	const WS_URL = `ws://${window.location.hostname}/ws`;
 
 	const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
