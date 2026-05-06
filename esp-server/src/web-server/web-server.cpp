@@ -1,6 +1,19 @@
 #include "./web-server.h"
 
 namespace AppWebServer {
+    namespace {
+        static const char* ssid = "NAVCART_DEMO";
+        static const byte DNS_PORT = 53;
+
+        static DNSServer dnsServer;
+        static WebServer server(80);
+
+    }
+    
+    String getContentType(String filename);
+    void handleRoot();
+    void handleNotFound();
+    
     DNSServer& getDnsServer() {
         return dnsServer;
     }

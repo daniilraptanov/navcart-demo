@@ -1,6 +1,14 @@
 #include "socket-server.h"
 
 namespace AppWebSocket {
+    namespace {
+        WebSocketsServer webSocket = WebSocketsServer(81);
+    }
+
+    WebSocketsServer& getWebSocket() {
+        return webSocket;
+    }
+
     void webSocketEvent(uint8_t num, WStype_t type, uint8_t * payload, size_t length) {
         switch(type) {
             case WStype_DISCONNECTED:

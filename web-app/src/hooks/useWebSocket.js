@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 export const useAppWebSocket = () => {
-	const WS_URL = `ws://${window.location.hostname}/ws`;
+	const WS_URL = `ws://${window.location.hostname}:81`;
 
 	const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
 		WS_URL,
@@ -31,4 +31,4 @@ export const useAppWebSocket = () => {
 		statusText: connectionStatus,
 		isConnected: readyState === ReadyState.OPEN,
 	};
-}
+};

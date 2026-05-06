@@ -9,8 +9,4 @@ namespace AppWebSocket {
     void createBroadcastTask();
     
     WebSocketsServer& getWebSocket();
-
-    namespace {
-        WebSocketsServer webSocket = WebSocketsServer(81);
-    }
 }

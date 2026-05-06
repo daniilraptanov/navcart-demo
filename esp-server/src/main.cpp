@@ -17,6 +17,6 @@ void setup() {
 void loop() {
     AppWebServer::getDnsServer().processNextRequest();
     AppWebServer::getWebServer().handleClient();
-    AppWebSocket::webSocket.loop();
+    AppWebSocket::getWebSocket().loop();
     Monitoring::tick();
 }
