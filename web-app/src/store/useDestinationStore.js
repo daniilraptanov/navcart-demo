@@ -12,7 +12,7 @@ export const useDestinationStore = create((set, get) => ({
         { id: 8, name: 'Риба' },
     ],
 
-    activeId: 1,
+    activeId: 0,
     
     setActiveId: (id) => set({ activeId: id }),
     getActiveDestination: () => {
