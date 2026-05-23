@@ -6,9 +6,7 @@
 #include <freertos/semphr.h>
 
 namespace OpticalFlow {
-    const int RX_PIN = 16;
-    const int TX_PIN = 17;
-    
+    const int RX_PIN = 20;
     const int BAUD_RATE = 19200;
 
     void setup();

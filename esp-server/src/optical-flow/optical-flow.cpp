@@ -3,7 +3,7 @@
 namespace OpticalFlow {
 
     namespace {
-        HardwareSerial SerialOF(2);
+        HardwareSerial SerialOF(1);
         
         int32_t accumulatedDx = 0;
         int32_t accumulatedDy = 0;
@@ -81,7 +81,7 @@ namespace OpticalFlow {
     void setup() {
         dataMutex = xSemaphoreCreateMutex();
         
-        SerialOF.begin(BAUD_RATE, SERIAL_8N1, RX_PIN, TX_PIN);
+        SerialOF.begin(BAUD_RATE, SERIAL_8N1, RX_PIN, -1);
         Serial.println("Optical Flow UART initialized (19200 baud).");
     }
 
