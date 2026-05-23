@@ -1,6 +1,7 @@
 #include "./web-server/web-server.h"
 #include "./socket-server/socket-server.h"
 #include "./monitoring/monitoring.h"
+#include "./optical-flow/optical-flow.h"
 // #include "./pathfinder/pathfinder.h"
 
 void setup() { 
@@ -9,11 +10,13 @@ void setup() {
 
     AppWebServer::setup();
     AppWebSocket::setup();
+    OpticalFlow::setup();
+    // Pathfinder::setup();
 
     Monitoring::setInterval(10000);
 
     AppWebSocket::createBroadcastTask();
-    // Pathfinder::setup();
+    OpticalFlow::createSensorTask();
 }
 
 void loop() {
@@ -24,4 +27,8 @@ void loop() {
     AppWebServer::getWebServer().handleClient();
     AppWebSocket::getWebSocket().loop();
     Monitoring::tick();
+
+    // TODO :: it is here just for testing
+    OpticalFlow::printMotion();
 }
+
