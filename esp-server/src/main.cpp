@@ -2,6 +2,7 @@
 #include "./socket-server/socket-server.h"
 #include "./monitoring/monitoring.h"
 #include "./optical-flow/optical-flow.h"
+#include "./ranging-sensor/ranging-sensor.h"
 // #include "./pathfinder/pathfinder.h"
 
 void setup() { 
@@ -10,13 +11,14 @@ void setup() {
 
     AppWebServer::setup();
     AppWebSocket::setup();
-    OpticalFlow::setup();
+    RangingSensor::setup();
+
     // Pathfinder::setup();
 
     Monitoring::setInterval(10000);
 
     AppWebSocket::createBroadcastTask();
-    OpticalFlow::createSensorTask();
+    RangingSensor::createSensorTask();
 }
 
 void loop() {
@@ -29,6 +31,6 @@ void loop() {
     Monitoring::tick();
 
     // TODO :: it is here just for testing
-    OpticalFlow::printMotion();
+    RangingSensor::printDistance();
 }
 
