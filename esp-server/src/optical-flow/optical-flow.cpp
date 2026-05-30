@@ -97,28 +97,26 @@ namespace OpticalFlow {
         Serial.println("Optical Flow FreeRTOS task started.");
     }
 
-    void getMotion(int32_t& outDx, int32_t& outDy, uint8_t& outQuality) {
+    Motion getMotion() {
+        Motion m = {0, 0, 0};
         if (xSemaphoreTake(dataMutex, portMAX_DELAY)) {
-            outDx = accumulatedDx;
-            outDy = accumulatedDy;
-            outQuality = lastQuality;
+            m.dx = accumulatedDx;
+            m.dy = accumulatedDy;
+            m.quality = lastQuality;
             
             accumulatedDx = 0;
             accumulatedDy = 0;
             
             xSemaphoreGive(dataMutex);
         }
+        return m;
     }
 
     void printMotion() {
-        int32_t outDx = 0;
-        int32_t outDy = 0;
-        uint8_t outQuality = 0;
-
-        OpticalFlow::getMotion(outDx, outDy, outQuality);
+        Motion m = OpticalFlow::getMotion();
 
         char buffer[64];
-        snprintf(buffer, sizeof(buffer), "Motion -> dX: %4d | dY: %4d | Quality: %3u/255", outDx, outDy, outQuality);
+        snprintf(buffer, sizeof(buffer), "Motion -> dX: %4d | dY: %4d | Quality: %3u/255", m.dx, m.dy, m.quality);
         Serial.println(buffer);
     }
 }

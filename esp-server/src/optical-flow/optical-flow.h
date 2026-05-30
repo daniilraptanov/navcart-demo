@@ -9,9 +9,15 @@ namespace OpticalFlow {
     const int RX_PIN = 20;
     const int BAUD_RATE = 19200;
 
+    struct Motion {
+        int32_t dx;
+        int32_t dy;
+        uint8_t quality;
+    };
+
     void setup();
     void createSensorTask();
     
-    void getMotion(int32_t& outDx, int32_t& outDy, uint8_t& outQuality);
+    Motion getMotion();
     void printMotion();
 }
